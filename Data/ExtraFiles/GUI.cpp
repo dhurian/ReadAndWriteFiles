@@ -4,9 +4,10 @@
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
 
-#include <FL/Fl.H>
-#include <FL/Fl_Button.H>
-#include <FL/Fl_Output.H>
+
+#include "FL/Fl.H"
+#include "FL/Fl_Button.H"
+#include "FL/Fl_Output.H"
 #include "GUI.h"
 
 namespace Graph_lib {;

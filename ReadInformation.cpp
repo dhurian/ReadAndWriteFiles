@@ -6,9 +6,10 @@
 #include <fstream>
 #include <string>
 #include <vector>
-#include "Simple_window"
+#include "Data/ExtraFiles/Simple_window.h"
+#include "Data/ExtraFiles/Graph.h"
 
-class Point {
+class Point3d{
 public:   
     void getPoints(float *point);
     void setPoints(float x, float y, float z);
@@ -18,7 +19,7 @@ private:
     
 };
 
-void Point:: getPoints(float* point) {
+void Point3d:: getPoints(float* point) {
     point[0] = _x;
     point[1] = _y;
     point[2] = _z;
@@ -26,7 +27,7 @@ void Point:: getPoints(float* point) {
 }
 
 
-void Point::setPoints(float x, float y, float z) {
+void Point3d::setPoints(float x, float y, float z) {
     _x=x;
     _y=y;
     _z=z;
@@ -35,7 +36,7 @@ void Point::setPoints(float x, float y, float z) {
 
 
 
-void WriteFile(std::vector<Point> points, std::string path) {
+void WriteFile(vector<Point3d> points, std::string path) {
 
     std::fstream outputPath;
     float pointsDetailed[3];
@@ -51,6 +52,33 @@ void WriteFile(std::vector<Point> points, std::string path) {
     outputPath.close();
 
 }
+
+
+vector<Point3d> ReadFile(std::string path) {
+    std::string line;
+    std::ifstream ist(path);
+    vector<Point3d> points;
+    vector<float> allNumbers;
+
+    if (!ist) {
+        std::cout << "file doesn't exist" << std::endl;
+    }
+
+    while (std::getline(ist, line, ' ')) {
+        std::cout << line << std::endl;
+        allNumbers.push_back(stof(line));
+    };
+
+    for (int i = 0; i < allNumbers.size() / 3; i++) {
+
+        Point3d* point = new Point3d();
+        point->setPoints(allNumbers.at(i * 3), allNumbers.at(i * 3 + 1), allNumbers.at(i * 3 + 2));
+        points.push_back(*point);
+
+    }
+    return points;
+
+}
 int main()
 {
     std::string path;
@@ -58,45 +86,17 @@ int main()
     std::string line;
     std::string outputPath;
     float number=0;
-    std::vector<float> allNumbers;
-    std::vector<Point> points;
+    vector<Point3d> points;
    // std::cout << "Introduce path" << std::endl;
     //std::cin >> path;
     outputPath = "C:/Users/dhuri/OneDrive/CppProgramming/ReadInformation/Data/output.txt";
 
     path = "C:/Users/dhuri/OneDrive/CppProgramming/ReadInformation/Data/Data.x3d";
 
-    std::ifstream ist( path);
-    if (!ist) {
-        std::cout << "file doesn't exist" << std::endl;
-    }
-    
-    while (std::getline(ist,line, ' ')) {
-        std::cout << line << std::endl;
-        allNumbers.push_back(stof(line));
-    };
-
-    for (int i = 0; i < allNumbers.size() / 3; i++) {
-
-        Point* point = new Point();
-        point->setPoints(allNumbers.at(i * 3), allNumbers.at(i * 3 + 1), allNumbers.at(i * 3 + 2));
-        points.push_back(*point);
-
-    }
+    points = ReadFile(path);
 
 
     WriteFile(points, outputPath);
-    
 
+    return 0;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file

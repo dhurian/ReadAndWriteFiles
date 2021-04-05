@@ -4,8 +4,8 @@
 // "Programming -- Principles and Practice Using C++" by Bjarne Stroustrup
 //
 
-#include <FL/Fl_GIF_Image.H>
-#include <FL/Fl_JPEG_Image.H>
+#include "FL/Fl_GIF_Image.H"
+#include "FL/Fl_JPEG_Image.H"
 #include "Graph.h"
 
 //------------------------------------------------------------------------------

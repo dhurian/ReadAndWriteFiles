@@ -7,8 +7,8 @@
 #ifndef WINDOW_GUARD
 #define WINDOW_GUARD
 
-#include <FL/Fl.H>
-#include <FL/Fl_Window.H>
+#include "FL/Fl.H"
+#include "FL/Fl_Window.H"
 #include "std_lib_facilities.h"
 #include "Point.h"
 
