@@ -6,6 +6,7 @@
 #include <fstream>
 #include <string>
 #include <vector>
+#include "Simple_window"
 
 class Point {
 public:   
